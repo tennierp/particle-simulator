@@ -4,11 +4,13 @@
 
 class World {
     public:
+        World(float width, float height) : worldWidth(width), worldHeight(height) {}
         void initializeParticles();
         void create();
-
-    private:
         Particle particles{};
+    private:
+        float worldHeight{};
+        float worldWidth{};
 };
 
 

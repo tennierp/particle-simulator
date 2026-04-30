@@ -1,13 +1,14 @@
 #include "World.h"
 #include <random>
 
-std::random_device rd;  // Non-deterministic seed
-std::mt19937 gen(rd()); // Mersenne Twister engine
-std::uniform_int_distribution<> randomize(640, 480); // Range [WINDOW_WIDTH, WINDOW_HEIGHT]
-
 void World::initializeParticles() {
-    particles.x = randomize(gen);
-    particles.y = randomize(gen);
+    std::random_device rd;  // Non-deterministic seed
+    std::mt19937 gen(rd()); // Mersenne Twister engine
+    std::uniform_real_distribution<float> randX(0, worldWidth);
+    std::uniform_real_distribution<float> randY(0, worldHeight);
+
+    particles.x = randX(gen);
+    particles.y = randY(gen);
 }
 
 void World::create() {
