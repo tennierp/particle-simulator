@@ -12,5 +12,6 @@ FetchContent_MakeAvailable(SDL3)
 
 add_executable(particle-simulator main.cpp
         Engine.cpp
-        Engine.hpp)
+        Engine.h
+        Particle.h)
 target_link_libraries(particle-simulator PRIVATE SDL3::SDL3)
