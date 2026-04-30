@@ -1,8 +1,11 @@
 #include "Engine.h"
 
+int WINDOW_WIDTH = 640;
+int WINDOW_HEIGHT = 480;
+
 void Engine::run() {
     SDL_Init(SDL_INIT_VIDEO);
-    window = SDL_CreateWindow("Particles of Life", 640, 480, SDL_WINDOW_OPENGL);
+    window = SDL_CreateWindow("Particles of Life", WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
     renderer = SDL_CreateRenderer(window, nullptr);
 
     if (window == nullptr) {
