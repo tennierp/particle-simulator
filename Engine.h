@@ -1,13 +1,14 @@
 #ifndef PARTICLE_SIMULATOR_ENGINE_H
 #define PARTICLE_SIMULATOR_ENGINE_H
 #include <SDL3/SDL.h>
+#include "World.h"
 
 class Engine {
     public:
-        const int WINDOW_WIDTH = 640;
-        const int WINDOW_HEIGHT = 480;
+        const int window_width = 640;
+        const int window_height = 480;
 
-        void initWindow();
+        void init();
         void run();
         void loop();
         void render();
@@ -18,6 +19,7 @@ class Engine {
         SDL_Window *window{};
         SDL_Renderer *renderer{};
 
+        World world{(float)window_width, (float)window_height, 100};
         bool running = true;
 };
 
