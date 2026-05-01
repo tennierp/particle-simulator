@@ -8,7 +8,7 @@ class World {
     public:
         World(float width, float height, int p_amount) : world_width(width), world_height(height), particle_count(p_amount) {}
 
-        void initializeParticles();
+        void initializeParticles(); // constructor and initializing should be in order of the class variables below, not random.
         void create();
 
         std::vector<Particle> particles{}; // add getParticles() function instead of publicly allowing them
