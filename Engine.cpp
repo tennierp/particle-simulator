@@ -36,12 +36,14 @@ void Engine::render() {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 
-    SDL_FRect rects[world.particle_count];
+    std::vector<SDL_FRect> rects;
+    rects.reserve(world.particle_count); // add rects and .reserve to be a class variable instead
+
     for (int i = 0; i < world.particle_count; i++) {
-        rects[i] = SDL_FRect{world.particles[i].x, world.particles[i].y, 6, 6}; // 6 will change to a variable "particle size"
+        rects.push_back(SDL_FRect{world.particles[i].x, world.particles[i].y, 6, 6});
     }
 
-    SDL_RenderFillRects(renderer, rects, world.particle_count);
+    SDL_RenderFillRects(renderer, rects.data(), world.particle_count);
 
     // Draw screen
     SDL_RenderPresent(renderer);
