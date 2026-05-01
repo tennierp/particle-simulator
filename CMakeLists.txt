@@ -17,3 +17,11 @@ add_executable(particle-simulator main.cpp
         World.cpp
         World.h)
 target_link_libraries(particle-simulator PRIVATE SDL3::SDL3)
+
+if(WIN32)
+    add_custom_command(TARGET particle-simulator POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<TARGET_FILE:SDL3::SDL3>
+            $<TARGET_FILE_DIR:particle-simulator>
+    )
+endif()
