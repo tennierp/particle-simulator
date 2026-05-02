@@ -87,6 +87,12 @@ struct Vec2 {
     float mag() const {
         return std::sqrt(x * x + y * y);
     }
+
+    void normalize() {
+        float magnitude = this->mag();
+        this->x /= magnitude;
+        this->y /= magnitude;
+    }
 };
 
 #endif //PARTICLE_SIMULATOR_UTILS_H
