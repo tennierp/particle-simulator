@@ -5,8 +5,8 @@
 
 class Engine {
     public:
-        const int window_width = 640;
-        const int window_height = 480;
+        const int window_width = 1024;
+        const int window_height = 720;
 
         void init();
         void run();
