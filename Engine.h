@@ -18,6 +18,7 @@ class Engine {
     private:
         SDL_Window *window{};
         SDL_Renderer *renderer{};
+        std::vector<SDL_FRect> rects;
 
         World world{(float)window_width, (float)window_height, 100};
         bool running = true;

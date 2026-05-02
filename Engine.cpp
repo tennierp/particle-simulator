@@ -16,6 +16,7 @@ void Engine::init() {
     }
 
     world.initializeParticles();
+    rects.reserve(world.getParticleCount());
 }
 
 void Engine::loop() {
@@ -35,15 +36,12 @@ void Engine::render() {
     // Draw logic here
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-
-    std::vector<SDL_FRect> rects;
-    rects.reserve(world.particle_count); // add rects and .reserve to be a class variable instead
-
-    for (int i = 0; i < world.particle_count; i++) {
-        rects.push_back(SDL_FRect{world.particles[i].position.x, world.particles[i].position.y, 6, 6});
+    std::vector<Particle> particles = world.getParticles();
+    for (int i = 0; i < world.getParticleCount(); i++) {
+        rects.push_back(SDL_FRect{particles[i].position.x, particles[i].position.y, 6, 6});
     }
 
-    SDL_RenderFillRects(renderer, rects.data(), world.particle_count);
+    SDL_RenderFillRects(renderer, rects.data(), world.getParticleCount());
 
     // Draw screen
     SDL_RenderPresent(renderer);
