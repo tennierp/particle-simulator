@@ -1,6 +1,14 @@
 #include "Render.h"
 
-void Render::init(SDL_Window *window, int particleCount) {
+SDL_Color COLORS[5] = {
+        {255, 0, 0, 255},    // red
+        {255, 150, 50, 255}, // orange
+        {255, 225, 50, 255}, // yellow
+        {0, 255, 0, 255},    // green
+        {0, 0, 255, 255},    // blue
+};
+
+void Render::init(SDL_Window *window) {
     renderer = SDL_CreateRenderer(window, nullptr);
 }
 
