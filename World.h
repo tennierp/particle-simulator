@@ -16,7 +16,7 @@ private:
     int world_width{};
     int world_height{};
     int particle_count{};
-    static const int numTypes = 5;
+    static const int numTypes = 8;
     float forces[numTypes][numTypes]{};
     float minDistances[numTypes][numTypes]{};
     float radii[numTypes][numTypes]{};

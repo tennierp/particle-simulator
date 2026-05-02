@@ -7,7 +7,7 @@ void World::initWorld(int width, int height, int amount) {
 
     std::uniform_int_distribution<> randX(0, world_width);
     std::uniform_int_distribution<> randY(0, world_height);
-    std::uniform_int_distribution<> rType(0, 4);
+    std::uniform_int_distribution<> rType(0, 7);
 
     for (int i = 0; i < particle_count; i++) {
         Particle p{512, 360};
@@ -77,6 +77,6 @@ void World::update() {
         particles[i].position += particles[i].velocity;
         particles[i].position.x = fmod(particles[i].position.x + world_width, world_width);
         particles[i].position.y = fmod(particles[i].position.y + world_height, world_height);
-        particles[i].velocity *= 0.75; // friction
+        particles[i].velocity *= 0.90; // friction
     }
 }
