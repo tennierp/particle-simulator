@@ -4,32 +4,21 @@ void World::initWorld(int width, int height, int amount) {
     world_width = width;
     world_height = height;
     particle_count = amount;
-
-    std::uniform_int_distribution<> randX(0, world_width);
-    std::uniform_int_distribution<> randY(0, world_height);
-    std::uniform_int_distribution<> rType(0, 7);
+    Randomizer rand;
 
     for (int i = 0; i < particle_count; i++) {
-        Particle p{512, 360};
-        p.velocity += 0.1; // this could be used to give particles a small velocity at their spawn time
-        p.type = rType(rng);
+        Particle p{rand.randomFloat(0, world_width), rand.randomFloat(0, world_height)};
+        p.velocity += 0;
+        p.type = rand.randomInt(0, 7);
         particles.push_back(p);
     }
-
-    // forces[numTypes][numTypes]{};
-    // minDistances[numTypes][numTypes]{};
-    // radii[numTypes][numTypes]{}; // must be bigger than minDistances
-
-    std::uniform_real_distribution<float> fRand(-1, 1);
-    std::uniform_real_distribution<float> mdRand(30, 50); // 30 50
-    std::uniform_real_distribution<float> rRand(70, 250); // 70 250
 
     // TODO: Print tables for these matrices
     for (int row = 0; row < numTypes; row++) {
         for (int col = 0; col < numTypes; col++) {
-            forces[row][col] = fRand(rng);
-            minDistances[row][col] = mdRand(rng);
-            radii[row][col] = rRand(rng);
+            forces[row][col] = rand.randomFloat(-1, 1);
+            minDistances[row][col] = rand.randomFloat(4, 50);
+            radii[row][col] = rand.randomFloat(70, 250); // must be larger than minDistances
         }
     }
 }
@@ -77,6 +66,6 @@ void World::update() {
         particles[i].position += particles[i].velocity;
         particles[i].position.x = fmod(particles[i].position.x + world_width, world_width);
         particles[i].position.y = fmod(particles[i].position.y + world_height, world_height);
-        particles[i].velocity *= 0.90; // friction
+        particles[i].velocity *= 0.85; // friction
     }
 }

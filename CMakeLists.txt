@@ -18,7 +18,8 @@ add_executable(particle-simulator main.cpp
         World.h
         Utils.h
         Render.cpp
-        Render.h)
+        Render.h
+)
 target_link_libraries(particle-simulator PRIVATE SDL3::SDL3)
 
 if(WIN32)

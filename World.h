@@ -2,7 +2,6 @@
 #define PARTICLE_SIMULATOR_WORLD_H
 #include "Particle.h"
 #include <vector>
-#include <random>
 
 class World {
 public:
@@ -20,8 +19,6 @@ private:
     float forces[numTypes][numTypes]{};
     float minDistances[numTypes][numTypes]{};
     float radii[numTypes][numTypes]{};
-
-    std::mt19937 rng{std::random_device{}()};
 };
 
 #endif //PARTICLE_SIMULATOR_WORLD_H

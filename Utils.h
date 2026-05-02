@@ -1,6 +1,7 @@
 #ifndef PARTICLE_SIMULATOR_UTILS_H
 #define PARTICLE_SIMULATOR_UTILS_H
 #include <cmath>
+#include <random>
 
 struct Vec2 {
     float x, y;
@@ -103,5 +104,19 @@ inline float map(float value, float inputMin, float inputMax, float outputMin, f
     float fraction = (value - inputMin) / (inputMax - inputMin);
     return outputMin + fraction * (outputMax - outputMin);
 }
+
+struct Randomizer {
+    std::mt19937 rng{std::random_device{}()};
+
+    float randomFloat(float min, float max) {
+        std::uniform_real_distribution<float> fRand(min,max);
+        return fRand(rng);
+    }
+
+    int randomInt(int min, int max) {
+        std::uniform_int_distribution<> intRand(min, max);
+        return intRand(rng);
+    }
+};
 
 #endif //PARTICLE_SIMULATOR_UTILS_H
