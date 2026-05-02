@@ -17,18 +17,24 @@ void Render::render(World &world) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    // Draw logic here
+    // Draw logic
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
     std::vector<Particle> particles = world.getParticles();
     std::vector<SDL_FRect> rects {};
     rects.reserve(world.getParticleCount());
 
+    // Use batching to spawn each color particle all at once
+    std::vector<SDL_FRect> typeRects[5];
+
     for (int i = 0; i < world.getParticleCount(); i++) {
-        rects.push_back(SDL_FRect{particles[i].position.x, particles[i].position.y, 6, 6});
+        typeRects[particles[i].type].push_back(SDL_FRect{particles[i].position.x, particles[i].position.y, 4, 4}); // Particle size is still hardcoded here
     }
 
-    SDL_RenderFillRects(renderer, rects.data(), world.getParticleCount());
+    for (int i = 0; i < 5; i++) {
+        SDL_SetRenderDrawColor(renderer, COLORS[i].r, COLORS[i].g, COLORS[i].b, 255);
+        SDL_RenderFillRects(renderer, typeRects[i].data(), typeRects[i].size());
+    }
 
     // Draw screen
     SDL_RenderPresent(renderer);
