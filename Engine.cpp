@@ -3,20 +3,18 @@
 void Engine::run() {
     init();
     loop();
-    cleanup();
 }
 
 void Engine::init() {
     SDL_Init(SDL_INIT_VIDEO);
     window = SDL_CreateWindow("Particles of Life", window_width, window_height, SDL_WINDOW_OPENGL);
-    renderer = SDL_CreateRenderer(window, nullptr); // renderer will be moved into its own class but for now it lives here
+    renderer.init(window, world.getParticleCount());
 
     if (window == nullptr) {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not open window: %s\n", SDL_GetError());
     }
 
     world.initializeParticles();
-    rects.reserve(world.getParticleCount());
 }
 
 void Engine::loop() {
@@ -24,33 +22,8 @@ void Engine::loop() {
     while (running) {
         handleEvents();
         // update() the particles will go here
-        render();
+        renderer.render(world);
     }
-}
-
-void Engine::render() {
-    // Clear screen
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    SDL_RenderClear(renderer);
-
-    // Draw logic here
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-
-    std::vector<Particle> particles = world.getParticles();
-    for (int i = 0; i < world.getParticleCount(); i++) {
-        rects.push_back(SDL_FRect{particles[i].position.x, particles[i].position.y, 6, 6});
-    }
-
-    SDL_RenderFillRects(renderer, rects.data(), world.getParticleCount());
-
-    // Draw screen
-    SDL_RenderPresent(renderer);
-}
-
-void Engine::cleanup() {
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
 }
 
 void Engine::handleEvents() {
@@ -70,4 +43,11 @@ void Engine::handleEvents() {
                 }
         }
     }
+}
+
+Engine::~Engine() {
+    SDL_DestroyWindow(window);
+    window = nullptr;
+
+    SDL_Quit();
 }
