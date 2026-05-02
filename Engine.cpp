@@ -40,7 +40,7 @@ void Engine::render() {
     rects.reserve(world.particle_count); // add rects and .reserve to be a class variable instead
 
     for (int i = 0; i < world.particle_count; i++) {
-        rects.push_back(SDL_FRect{world.particles[i].x, world.particles[i].y, 6, 6});
+        rects.push_back(SDL_FRect{world.particles[i].position.x, world.particles[i].position.y, 6, 6});
     }
 
     SDL_RenderFillRects(renderer, rects.data(), world.particle_count);
