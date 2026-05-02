@@ -12,7 +12,6 @@ public:
     ~Render();
 private:
     SDL_Renderer *renderer {};
-    std::vector<SDL_FRect> rects {};
 };
 
 

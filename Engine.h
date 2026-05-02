@@ -13,7 +13,6 @@ class Engine {
         void init();
         void run();
         void loop();
-        void cleanup() const;
         void handleEvents();
 
         ~Engine();

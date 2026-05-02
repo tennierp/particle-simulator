@@ -7,14 +7,14 @@ void Engine::run() {
 
 void Engine::init() {
     SDL_Init(SDL_INIT_VIDEO);
+
     window = SDL_CreateWindow("Particles of Life", window_width, window_height, SDL_WINDOW_OPENGL);
     renderer.init(window, world.getParticleCount());
+    world.initializeParticles();
 
     if (window == nullptr) {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not open window: %s\n", SDL_GetError());
     }
-
-    world.initializeParticles();
 }
 
 void Engine::loop() {

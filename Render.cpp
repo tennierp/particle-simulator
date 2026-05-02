@@ -2,7 +2,6 @@
 
 void Render::init(SDL_Window *window, int particleCount) {
     renderer = SDL_CreateRenderer(window, nullptr);
-    rects.reserve(particleCount);
 }
 
 void Render::render(World &world) {
@@ -14,6 +13,9 @@ void Render::render(World &world) {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
     std::vector<Particle> particles = world.getParticles();
+    std::vector<SDL_FRect> rects {};
+    rects.reserve(world.getParticleCount());
+
     for (int i = 0; i < world.getParticleCount(); i++) {
         rects.push_back(SDL_FRect{particles[i].position.x, particles[i].position.y, 6, 6});
     }
