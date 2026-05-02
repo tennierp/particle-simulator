@@ -10,6 +10,10 @@ void World::initializeParticles() {
     }
 }
 
-void World::create() {
+int World::getParticleCount() const {
+    return particle_count;
+}
 
+std::vector<Particle> World::getParticles() {
+    return particles;
 }

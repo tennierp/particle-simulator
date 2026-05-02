@@ -8,15 +8,16 @@ class World {
     public:
         World(float width, float height, int p_amount) : world_width(width), world_height(height), particle_count(p_amount) {}
 
-        void initializeParticles(); // constructor and initializing should be in order of the class variables below, not random.
-        void create();
-
-        std::vector<Particle> particles{}; // add getParticles() function instead of publicly allowing them
-        const int particle_count;
+        void initializeParticles();
+        int getParticleCount() const;
+        std::vector<Particle> getParticles();
 
     private:
-        float world_height{};
+        std::vector<Particle> particles{};
         float world_width{};
+        float world_height{};
+        const int particle_count;
+
         std::mt19937 rng{std::random_device{}()};
 };
 
