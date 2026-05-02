@@ -1,0 +1,10 @@
+#ifndef PARTICLE_SIMULATOR_RENDER_H
+#define PARTICLE_SIMULATOR_RENDER_H
+
+
+class Render {
+
+};
+
+
+#endif //PARTICLE_SIMULATOR_RENDER_H
