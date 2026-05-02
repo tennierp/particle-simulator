@@ -21,7 +21,7 @@ void Engine::loop() {
     // handle events → update simulation → render
     while (running) {
         handleEvents();
-        // update() the particles will go here
+        world.update();
         renderer.render(world);
     }
 }

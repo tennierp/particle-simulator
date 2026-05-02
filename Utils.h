@@ -90,9 +90,18 @@ struct Vec2 {
 
     void normalize() {
         float magnitude = this->mag();
-        this->x /= magnitude;
-        this->y /= magnitude;
+        if (magnitude > 0) {
+            this->x /= magnitude;
+            this->y /= magnitude;
+        }
     }
 };
+
+// take the distance, and map it from the range 0→minDistance onto the range 1→0
+inline float map(float value, float inputMin, float inputMax, float outputMin, float outputMax) {
+    if (inputMax - inputMin == 0) return outputMin;
+    float fraction = (value - inputMin) / (inputMax - inputMin);
+    return outputMin + fraction * (outputMax - outputMin);
+}
 
 #endif //PARTICLE_SIMULATOR_UTILS_H

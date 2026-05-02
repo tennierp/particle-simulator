@@ -5,22 +5,21 @@
 #include "World.h"
 
 class Engine {
-    public:
-        SDL_Window *window{};
-        const int window_width = 1024;
-        const int window_height = 720;
+public:
+    void init();
+    void run();
+    void loop();
+    void handleEvents();
 
-        void init();
-        void run();
-        void loop();
-        void handleEvents();
+    ~Engine();
 
-        ~Engine();
-
-    private:
-        World world{(float)window_width, (float)window_height, 100};
-        Render renderer;
-        bool running = true;
+private:
+    const int window_width = 1024;
+    bool running = true;
+    const int window_height = 720;
+    SDL_Window *window{};
+    Render renderer;
+    World world{(float)window_width, (float)window_height, 500};
 };
 
 #endif //PARTICLE_SIMULATOR_ENGINE_H
