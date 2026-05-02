@@ -15,11 +15,11 @@ public:
 
 private:
     const int window_width = 1024;
-    bool running = true;
     const int window_height = 720;
     SDL_Window *window{};
-    Render renderer;
-    World world{(float)window_width, (float)window_height, 500};
+    Render renderer{};
+    World world{}; // particle count is hardcoded here
+    bool running = true;
 };
 
 #endif //PARTICLE_SIMULATOR_ENGINE_H

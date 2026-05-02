@@ -6,13 +6,12 @@
 
 class Render {
 public:
-    void init(SDL_Window *window, int particleCount);
+    void init(SDL_Window *window);
     void render(World &world);
 
     ~Render();
 private:
     SDL_Renderer *renderer {};
 };
-
 
 #endif //PARTICLE_SIMULATOR_RENDER_H
