@@ -73,7 +73,7 @@ void World::update(double deltaTime) {
 
                         if (distance < minDistances[particles[j].type][particles[i].type]) {
                             Vec2 force = direction;                                                 // the -5 scalar serves two purposes: flips the force direction to push particles away from each other,
-                            force *= abs(forces[particles[j].type][particles[i].type]) * -5; // and makes the repulsion stronger than the attraction. If you change K or friction, the repulsion strength may need to be retuned to maintain that balance
+                            force *= std::abs(forces[particles[j].type][particles[i].type]) * -5; // and makes the repulsion stronger than the attraction. If you change K or friction, the repulsion strength may need to be retuned to maintain that balance
                             force *= map(distance, 0, minDistances[particles[j].type][particles[i].type], 1, 0);
                             force *= 0.05; // scalar for force we will add later;
                             totalForce += force;
