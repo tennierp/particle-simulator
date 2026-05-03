@@ -10,7 +10,7 @@ void Engine::init() {
 
     window = SDL_CreateWindow("Particles of Life", window_width, window_height, SDL_WINDOW_OPENGL);
     renderer.init(window);
-    world.initWorld(window_width, window_height, 1000);
+    world.initWorld(window_width, window_height, 2500);
 
     if (window == nullptr) {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not open window: %s\n", SDL_GetError());
@@ -20,7 +20,6 @@ void Engine::init() {
 void Engine::loop() {
     // handle events → update simulation → render
     Uint64 last = SDL_GetPerformanceCounter();
-    double deltaTime = 0.0;
 
     while (running) {
         Uint64 now = SDL_GetPerformanceCounter();

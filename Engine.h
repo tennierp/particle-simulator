@@ -14,11 +14,12 @@ public:
     ~Engine();
 
 private:
-    const int window_width = 1024;
-    const int window_height = 720;
+    const int window_width = 1200;
+    const int window_height = 800;
     SDL_Window *window{};
     Render renderer{};
     World world{}; // particle count is hardcoded here
+    double deltaTime = 0.0;
     bool running = true;
 };
 
