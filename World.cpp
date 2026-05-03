@@ -7,7 +7,7 @@ void World::initWorld(int width, int height, int amount) {
     Randomizer rand;
 
     for (int i = 0; i < particle_count; i++) {
-        Particle p{rand.randomFloat(0, world_width), rand.randomFloat(0, world_height)};
+        Particle p{rand.randomFloat(500, 600), rand.randomFloat(300, 360)};
         p.velocity += 0;
         p.type = rand.randomInt(0, 7);
         particles.push_back(p);
@@ -31,7 +31,7 @@ const std::vector<Particle> &World::getParticles() const {
     return particles;
 }
 
-void World::update() {
+void World::update(double deltaTime) {
     for (int i = 0; i < particles.size(); i++) {
         Vec2 direction{};
         Vec2 totalForce{};
@@ -62,10 +62,10 @@ void World::update() {
         }
 
         acceleration += totalForce;
-        particles[i].velocity += acceleration;
-        particles[i].position += particles[i].velocity;
+        particles[i].velocity += acceleration * deltaTime;
+        particles[i].position += particles[i].velocity * deltaTime;
         particles[i].position.x = fmod(particles[i].position.x + world_width, world_width);
         particles[i].position.y = fmod(particles[i].position.y + world_height, world_height);
-        particles[i].velocity *= 0.85; // friction
+        particles[i].velocity *= 0.75; // friction
     }
 }

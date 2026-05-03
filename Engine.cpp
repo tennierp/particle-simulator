@@ -19,9 +19,16 @@ void Engine::init() {
 
 void Engine::loop() {
     // handle events → update simulation → render
+    Uint64 last = SDL_GetPerformanceCounter();
+    double deltaTime = 0.0;
+
     while (running) {
+        Uint64 now = SDL_GetPerformanceCounter();
+        deltaTime = (double)((now - last) / (double)SDL_GetPerformanceFrequency()) * 60;
+        last = now;
+
         handleEvents();
-        world.update();
+        world.update(deltaTime);
         renderer.render(world);
     }
 }

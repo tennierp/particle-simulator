@@ -8,7 +8,7 @@ public:
     void initWorld(int world_width, int world_height, int particle_count);
     int getParticleCount() const;
     const std::vector<Particle> &getParticles() const;
-    void update();
+    void update(double deltaTime);
 
 private:
     std::vector<Particle> particles{};
