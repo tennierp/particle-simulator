@@ -1,6 +1,10 @@
 #include "World.h"
 #include <algorithm>
 
+// TODO: Print tables or GUI for force/minDistance/maxInteractionDist matrices
+// TODO: Clean up unnecessary private variables in World.h
+// TODO: Add force K and friction variables to private variables in World.h
+
 void World::initWorld(int width, int height, int amount) {
     world_width = width;
     world_height = height;
@@ -17,7 +21,6 @@ void World::initWorld(int width, int height, int amount) {
         particles.push_back(p);
     }
 
-    // TODO: Print tables for these matrices
     for (int row = 0; row < numTypes; row++) {
         for (int col = 0; col < numTypes; col++) {
             forces[row][col] = rand.randomFloat(-1, 1);
@@ -69,8 +72,8 @@ void World::update(double deltaTime) {
                         direction.normalize();
 
                         if (distance < minDistances[particles[j].type][particles[i].type]) {
-                            Vec2 force = direction;
-                            force *= abs(forces[particles[j].type][particles[i].type]) * -5; // -3 is a scalar subject to change
+                            Vec2 force = direction;                                                 // the -5 scalar serves two purposes: flips the force direction to push particles away from each other,
+                            force *= abs(forces[particles[j].type][particles[i].type]) * -5; // and makes the repulsion stronger than the attraction. If you change K or friction, the repulsion strength may need to be retuned to maintain that balance
                             force *= map(distance, 0, minDistances[particles[j].type][particles[i].type], 1, 0);
                             force *= 0.05; // scalar for force we will add later;
                             totalForce += force;
